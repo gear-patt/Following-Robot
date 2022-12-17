@@ -9,15 +9,15 @@ def callback(data):
 	print(data.data)
 	data = data.data
 	data = int(data)
-	if data in [1,2,3]:
-		df = pd.read_csv('number.csv')
+	if data in [1,2]:
+		df = pd.read_csv('/home/mustar/catkin_ws/src/simple_navigation_goals/scripts/number.csv')
 		df['number'] = data
-		df.to_csv('number.csv', index=False)
+		df.to_csv('/home/mustar/catkin_ws/src/simple_navigation_goals/scripts/goals.csv', index=False)
 		call(["rosrun", "simple_navigation_goals", "send_goal.py"])
 
 def listener():
 	rospy.init_node('listener', anonymous=True)
-  	rospy.Subscriber("chatter", String, callback)
+  	rospy.Subscriber("take_me_to", String, callback)
   	rospy.spin()
 if __name__ == '__main__':
 	listener()

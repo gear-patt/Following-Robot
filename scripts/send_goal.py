@@ -13,9 +13,9 @@ def movebase_client(num):
     goal = MoveBaseGoal()
     goal.target_pose.header.frame_id = "map"
     goal.target_pose.header.stamp = rospy.Time.now()
-    goal_data = pd.read_csv('/home/gear-patt/catkin_ws/src/simple_navigation_goals/scripts/goals.csv')
-    goal.target_pose.pose.position.x = float(goal_data['goal'+str(num)+'_x'][0])
-    goal.target_pose.pose.position.y = float(goal_data['goal'+str(num)+'_y'][0])
+    goal_data = pd.read_csv('/home/mustar/catkin_ws/src/simple_navigation_goals/scripts/goals.csv')
+    goal.target_pose.pose.position.x = #float(goal_data['goal'+str(num)+'_x'][0])
+    goal.target_pose.pose.position.y = #float(goal_data['goal'+str(num)+'_y'][0])
     goal.target_pose.pose.orientation.w = 1.0
 
     client.send_goal(goal)
@@ -29,10 +29,9 @@ def movebase_client(num):
 if __name__ == '__main__':
     try:
         rospy.init_node('movebase_client_py')
-        num = int(pd.read_csv('/home/gear-patt/catkin_ws/src/simple_navigation_goals/scripts/number.csv')['number'][0])
+        num = int(pd.read_csv('/home/mustar/catkin_ws/src/simple_navigation_goals/scripts/number.csv')['number'][0])
         result = movebase_client(num)
         if result:
             rospy.loginfo("Goal execution done!")
     except rospy.ROSInterruptException:
         rospy.loginfo("Navigation test finished.")
-
